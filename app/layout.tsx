@@ -4,8 +4,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ClientLayout from "./clientLayou";
 
-import { AppSidebar } from "@/components/app-sidebar";
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",

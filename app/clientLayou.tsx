@@ -1,4 +1,3 @@
-// ClientLayout.tsx
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -9,7 +8,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
-    const showSidebar = !pathname.startsWith('/auth');
+    const showSidebar = pathname ? !pathname.startsWith('/auth') : false;
 
     return (
         <SidebarProvider>

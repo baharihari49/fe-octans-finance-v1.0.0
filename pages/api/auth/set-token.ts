@@ -2,8 +2,19 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { serialize } from 'cookie';
 
+// Define the expected body type
+interface SetTokenBody {
+  token: string;
+}
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { token } = req.body;
+  const body = req.body as SetTokenBody; // Explicitly type the body
+  const { token } = body;
+
+  if (!token) {
+    res.status(400).json({ message: 'Token is required' });
+    return;
+  }
 
   res.setHeader(
     'Set-Cookie',

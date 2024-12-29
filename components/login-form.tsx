@@ -1,35 +1,47 @@
-'use client'
-import Link from "next/link"
+'use client';
+import Link from "next/link";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useState } from "react"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useState } from "react";
 import { useRouter } from 'next/navigation';
 
+import { login } from "@/services/autServices";
 
-import { login } from "@/services/autServices"
+// Define the type for the response from `login` function
+interface LoginResponse {
+  success: boolean;
+  token?: string; // Add other fields as necessary
+  message?: string;
+}
 
 export function LoginForm() {
-
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const router = useRouter()
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // To handle error messages
+  const router = useRouter();
 
   const handelSubmit = async () => {
-    const respon = await login(email, password)
+    try {
+      const response = (await login(email, password)) as LoginResponse;
 
-    if(respon.success == true){
-      router.push('/')
+      if (response.success) {
+        router.push('/');
+      } else {
+        setErrorMessage(response.message || 'Login failed.');
+      }
+    } catch (error) {
+      setErrorMessage('An unexpected error occurred during login.');
     }
-  }
+  };
 
   return (
     <Card className="mx-auto w-[450px]">
@@ -58,9 +70,22 @@ export function LoginForm() {
                 Lupa password?
               </Link>
             </div>
-            <Input id="password" type="password" onChange={(e) => setPassword(e.target.value)} required placeholder="*******"/>
+            <Input
+              id="password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="*******"
+            />
           </div>
-          <Button onClick={handelSubmit} type="submit" className="w-full primary-color-bg">
+          {errorMessage && (
+            <p className="text-red-500 text-sm">{errorMessage}</p>
+          )}
+          <Button
+            onClick={() => void handelSubmit()} // Use `void` to ensure compliance
+            type="button"
+            className="w-full primary-color-bg"
+          >
             Login
           </Button>
         </div>
@@ -72,5 +97,5 @@ export function LoginForm() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
