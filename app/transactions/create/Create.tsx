@@ -25,7 +25,7 @@ export const Create: React.FC<CreateProps> = ({ setRefresh }) => {
   const [description, setDescription] = useState<string | undefined>(undefined);
   const [transactionType, setTransactionType] = useState<number | undefined>(undefined);
   const [transactionCategory, setTransactionCategory] = useState<number | undefined>(undefined);
-  const [errors, setErrors] = useState<typeSchmeTransactions>({ date: '', amount: 0, description: '', transaction_type_id: 0, transaction_category_id: 0 });
+  const [errors, setErrors] = useState<typeSchmeTransactions>({ date: undefined, amount: undefined, description: undefined, transaction_type_id: undefined, transaction_category_id: undefined });
   const [vendor, setVendor] = useState<VendorType>(null);
   const [dataTransactionType, setDataTransactionType] = useState<
     { id: string; name: string }[]

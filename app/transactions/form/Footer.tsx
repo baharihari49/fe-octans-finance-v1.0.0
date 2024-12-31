@@ -2,11 +2,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable no-console */
 import React from "react";
 import { Submit } from "../create/Submit";
 import { formSchmeaTransaction } from "./FormSchema";
 import { typeSchmeTransactions } from "./FormSchema";
-import { ZodError } from "zod";
 
 type VendorType = {
   id: number;
@@ -58,24 +60,15 @@ export const Footer: React.FC<FooterProps> = ({
         setOpen(false);
         setRefresh((prevRefresh) => !prevRefresh);
       }
-    } catch (error) {
-      if (error instanceof ZodError) {
-        const zodErrors = error.errors.reduce((acc: Partial<typeSchmeTransactions>, err) => {
-          if (
-            err.path &&
-            err.path.length > 0 &&
-            typeof err.message === "string" &&
-            (err.path[0] as keyof typeSchmeTransactions) in acc
-          ) {
-            const key = err.path[0] as keyof typeSchmeTransactions;
-            acc[key] = err.message as any; // Allow casting to any
-          }
-          return acc;
-        }, {} as Partial<typeSchmeTransactions>);
-        setErrors(zodErrors as typeSchmeTransactions);
-      } else {
-        console.error("Unexpected error occurred:", error);
-      }
+    } catch (validationError: any) {
+      if (validationError.errors) {
+        const zodErrors = validationError.errors.reduce((acc: any, error: any) => {
+            acc[error.path[0]] = error.message;
+            return acc;
+        }, {});
+
+        setErrors(zodErrors); // Set error ke state
+    }
     }
   };
 

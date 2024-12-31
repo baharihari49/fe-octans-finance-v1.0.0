@@ -1,11 +1,11 @@
 import z from 'zod';
 
 export interface typeSchmeTransactions {
-    date: string;
-    amount: number;
-    description: string;
-    transaction_type_id: number;
-    transaction_category_id: number;
+    date: string | undefined;
+    amount: number | undefined;
+    description: string | undefined;
+    transaction_type_id: number | undefined;
+    transaction_category_id: number | undefined;
 }
 
 export const formSchmeaTransaction = z.object({
