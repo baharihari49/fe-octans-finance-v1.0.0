@@ -12,6 +12,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { clientApiRequest } from "@/services/clientApiRequest";
 import React, { useEffect } from "react";
+import { typeSchmeTransactions } from "./FormSchema";
 
 // Define types for dataTransactionType and dataKategoriTransaksi
 type TransactionType = { id: string; name: string;};
@@ -26,15 +27,16 @@ interface FormProps {
   setDataKategoriTransaksi: React.Dispatch<React.SetStateAction<CategoryType[]>>;
   dataTransactionType: TransactionType[];
   dataKategoriTransaksi: CategoryType[];
-  setDate: React.Dispatch<React.SetStateAction<string>>;
-  date: string;
-  setAmount: React.Dispatch<React.SetStateAction<number>>;
-  amount: number;
-  setDescription: React.Dispatch<React.SetStateAction<string>>;
-  description: string;
-  setTransactionType: React.Dispatch<React.SetStateAction<number>>;
-  setTransactionCategory: React.Dispatch<React.SetStateAction<number>>;
+  setDate: React.Dispatch<React.SetStateAction<string | undefined>>;
+  date: string | undefined;
+  setAmount: React.Dispatch<React.SetStateAction<number | undefined>>;
+  amount: number | undefined;
+  setDescription: React.Dispatch<React.SetStateAction<string | undefined>>;
+  description: string | undefined;
+  setTransactionType: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setTransactionCategory: React.Dispatch<React.SetStateAction<number | undefined>>;
   setVendor: React.Dispatch<React.SetStateAction<VendorType | null>>;
+  errors: typeSchmeTransactions;
 }
 
 export const Forms: React.FC<FormProps> = ({
@@ -49,6 +51,7 @@ export const Forms: React.FC<FormProps> = ({
   setDescription,
   setTransactionCategory,
   setTransactionType,
+  errors,
 }) => {
   useEffect(() => {
     const getTransactionType = async () => {
@@ -100,6 +103,7 @@ export const Forms: React.FC<FormProps> = ({
           type="date"
           className="mt-2"
         />
+        {errors?.date && <p className="text-red-500 mt-1 text-sm">{errors?.date}</p>}
       </div>
       <div>
         <Label>Jumlah</Label>
@@ -110,6 +114,7 @@ export const Forms: React.FC<FormProps> = ({
           type="number"
           className="mt-2"
         />
+        {errors?.amount && <p className="text-red-500 mt-1 text-sm">{errors?.amount}</p>}
       </div>
       <div className="space-y-2">
         <Label>Jenis Transaksi</Label>
@@ -125,6 +130,7 @@ export const Forms: React.FC<FormProps> = ({
             ))}
           </SelectContent>
         </Select>
+        {errors?.transaction_type_id && <p className="text-red-500 mt-1 text-sm">{errors?.transaction_type_id}</p>}
       </div>
       <div className="space-y-2">
         <Label>Kategori Transaksi</Label>
@@ -140,6 +146,7 @@ export const Forms: React.FC<FormProps> = ({
             ))}
           </SelectContent>
         </Select>
+        {errors?.transaction_category_id && <p className="text-red-500 mt-1 text-sm">{errors?.transaction_category_id}</p>}
       </div>
       <div className="col-span-2 space-y-2">
         <Label>Supplier / Customer</Label>
@@ -156,6 +163,7 @@ export const Forms: React.FC<FormProps> = ({
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Type your message here."
         />
+        {errors?.description && <p className="text-red-500 mt-1 text-sm">{errors?.description}</p>}
       </div>
     </div>
   );

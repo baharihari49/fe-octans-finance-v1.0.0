@@ -8,12 +8,12 @@ type VendorType = {
 
 // Define the data body structure
 interface DataBody {
-  date: string; // Use string for dates
-  amount: number;
-  descriptions: string; // Match the backend field name
+  date: string | undefined; // Use string for dates
+  amount: number | undefined;
+  descriptions: string | undefined; // Match the backend field name
   vendor_id: VendorType | null;
-  transaction_category_id: number;
-  transaction_type_id: number;
+  transaction_category_id: number | undefined;
+  transaction_type_id: number | undefined;
 }
 
 // Define the submit props type

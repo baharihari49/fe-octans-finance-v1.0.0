@@ -6,6 +6,7 @@ import { Heading } from "./Heading";
 import { Forms } from "../form/Forms";
 import { Footer } from "../form/Footer";
 import { useState } from "react";
+import { typeSchmeTransactions } from "../form/FormSchema";
 
 // Define vendor type
 type VendorType = {
@@ -19,11 +20,12 @@ interface CreateProps {
 
 export const Create: React.FC<CreateProps> = ({ setRefresh }) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [date, setDate] = useState<string>('');
-  const [amount, setAmount] = useState<number>(0);
-  const [description, setDescription] = useState<string>('');
-  const [transactionType, setTransactionType] = useState<number>(0);
-  const [transactionCategory, setTransactionCategory] = useState<number>(0);
+  const [date, setDate] = useState<string | undefined>(undefined);
+  const [amount, setAmount] = useState<number | undefined>(undefined);
+  const [description, setDescription] = useState<string | undefined>(undefined);
+  const [transactionType, setTransactionType] = useState<number | undefined>(undefined);
+  const [transactionCategory, setTransactionCategory] = useState<number | undefined>(undefined);
+  const [errors, setErrors] = useState<typeSchmeTransactions>({ date: '', amount: 0, description: '', transaction_type_id: 0, transaction_category_id: 0 });
   const [vendor, setVendor] = useState<VendorType>(null);
   const [dataTransactionType, setDataTransactionType] = useState<
     { id: string; name: string }[]
@@ -54,6 +56,7 @@ export const Create: React.FC<CreateProps> = ({ setRefresh }) => {
             setTransactionCategory={setTransactionCategory}
             setTransactionType={setTransactionType}
             setVendor={setVendor}
+            errors={errors}
           />
         }
         modalFooter={
@@ -66,6 +69,7 @@ export const Create: React.FC<CreateProps> = ({ setRefresh }) => {
             vendor={vendor}
             setOpen={setOpen}
             setRefresh={setRefresh}
+            setErrors={setErrors}
           />
         }
       />
