@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Make the API request
-    const apiResponse = await fetch(`http://localhost:8000/api/${url}`, {
+    const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${url}`, {
       method: req.method,
       headers: {
         Authorization: `Bearer ${token}`,
