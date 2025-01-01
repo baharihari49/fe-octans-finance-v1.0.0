@@ -25,7 +25,7 @@ const Page = () => {
       try {
         // Explicitly type the API response
         const response = await clientApiRequest<{ data: Transaction[] }>({
-          url: '/transactions',
+          url: 'transactions',
           method: 'GET',
         });
 

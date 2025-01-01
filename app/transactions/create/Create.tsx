@@ -20,12 +20,12 @@ interface CreateProps {
 
 export const Create: React.FC<CreateProps> = ({ setRefresh }) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [date, setDate] = useState<string | undefined>(undefined);
-  const [amount, setAmount] = useState<number | undefined>(undefined);
-  const [description, setDescription] = useState<string | undefined>(undefined);
-  const [transactionType, setTransactionType] = useState<number | undefined>(undefined);
-  const [transactionCategory, setTransactionCategory] = useState<number | undefined>(undefined);
-  const [errors, setErrors] = useState<typeSchmeTransactions>({ date: undefined, amount: undefined, description: undefined, transaction_type_id: undefined, transaction_category_id: undefined });
+  const [date, setDate] = useState<string>('');
+  const [amount, setAmount] = useState<string>('0');
+  const [description, setDescription] = useState<string>('');
+  const [transactionType, setTransactionType] = useState<number>(0);
+  const [transactionCategory, setTransactionCategory] = useState<number>(0);
+  const [errors, setErrors] = useState<typeSchmeTransactions>({ date: undefined, amount: undefined, descriptions: undefined, transaction_type_id: undefined, transaction_category_id: undefined });
   const [vendor, setVendor] = useState<VendorType>(null);
   const [dataTransactionType, setDataTransactionType] = useState<
     { id: string; name: string }[]

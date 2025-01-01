@@ -10,9 +10,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { clientApiRequest } from "@/services/clientApiRequest";
 import React, { useEffect } from "react";
 import { typeSchmeTransactions } from "./FormSchema";
+import { clientApiRequest } from "@/services/clientApiRequest";
 
 // Define types for dataTransactionType and dataKategoriTransaksi
 type TransactionType = { id: string; name: string;};
@@ -27,14 +27,14 @@ interface FormProps {
   setDataKategoriTransaksi: React.Dispatch<React.SetStateAction<CategoryType[]>>;
   dataTransactionType: TransactionType[];
   dataKategoriTransaksi: CategoryType[];
-  setDate: React.Dispatch<React.SetStateAction<string | undefined>>;
-  date: string | undefined;
-  setAmount: React.Dispatch<React.SetStateAction<number | undefined>>;
-  amount: number | undefined;
-  setDescription: React.Dispatch<React.SetStateAction<string | undefined>>;
-  description: string | undefined;
-  setTransactionType: React.Dispatch<React.SetStateAction<number | undefined>>;
-  setTransactionCategory: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setDate: React.Dispatch<React.SetStateAction<string>>;
+  date: string;
+  setAmount: React.Dispatch<React.SetStateAction<string>>;
+  amount: string;
+  setDescription: React.Dispatch<React.SetStateAction<string>>;
+  description: string;
+  setTransactionType: React.Dispatch<React.SetStateAction<number>>;
+  setTransactionCategory: React.Dispatch<React.SetStateAction<number>>;
   setVendor: React.Dispatch<React.SetStateAction<VendorType | null>>;
   errors: typeSchmeTransactions;
 }
@@ -57,7 +57,7 @@ export const Forms: React.FC<FormProps> = ({
     const getTransactionType = async () => {
       try {
         const response = await clientApiRequest<{ data: TransactionType[] }>({
-          url: '/transaction-type',
+          url: 'transaction-type',
           method: 'GET',
         });
 
@@ -74,7 +74,7 @@ export const Forms: React.FC<FormProps> = ({
     try {
       setTransactionType(parseInt(value, 10));
       const response = await clientApiRequest<{ data: CategoryType[] }>({
-        url: '/transaction-category',
+        url: 'transaction-category',
         method: 'GET',
       });
 
@@ -108,7 +108,7 @@ export const Forms: React.FC<FormProps> = ({
       <div>
         <Label>Jumlah</Label>
         <Input
-          onChange={(e) => setAmount(parseFloat(e.target.value))}
+          onChange={(e) => setAmount(e.target.value)}
           value={amount}
           placeholder="jumlah transaksi"
           type="number"
@@ -163,7 +163,7 @@ export const Forms: React.FC<FormProps> = ({
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Type your message here."
         />
-        {errors?.description && <p className="text-red-500 mt-1 text-sm">{errors?.description}</p>}
+        {errors?.descriptions && <p className="text-red-500 mt-1 text-sm">{errors?.descriptions}</p>}
       </div>
     </div>
   );

@@ -8,12 +8,12 @@ type VendorType = {
 
 // Define the data body structure
 interface DataBody {
-  date: string | undefined; // Use string for dates
-  amount: number | undefined;
-  descriptions: string | undefined; // Match the backend field name
+  date: string; // Use string for dates
+  amount: string;
+  descriptions: string; // Match the backend field name
   vendor_id: VendorType | null;
-  transaction_category_id: number | undefined;
-  transaction_type_id: number | undefined;
+  transaction_category_id: number;
+  transaction_type_id: number;
 }
 
 // Define the submit props type
@@ -32,7 +32,7 @@ export const Submit = async ({ dataBody }: SubmitProps): Promise<ApiResponse> =>
   try {
     // Explicitly type the response
     const response: ApiResponse = await clientApiRequest({
-      url: "/transactions",
+      url: "transactions",
       method: "POST",
       body: dataBody,
     });

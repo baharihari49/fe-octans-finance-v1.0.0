@@ -16,11 +16,11 @@ type VendorType = {
 } | null;
 
 interface FooterProps {
-  date: string | undefined;
-  amount: number | undefined;
-  description: string | undefined;
-  transactionType: number | undefined;
-  transactionCategory: number | undefined;
+  date: string;
+  amount: string;
+  description: string;
+  transactionType: number;
+  transactionCategory: number;
   vendor: VendorType | null;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;

@@ -119,7 +119,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const getUser = async () => {
       try {
         const response = await clientApiRequest<UserType>({
-          url: "/user",
+          url: "user",
           method: "GET",
         });
 
