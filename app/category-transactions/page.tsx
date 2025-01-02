@@ -28,7 +28,7 @@ const Page = () => {
       }
     };
 
-    fetchData();
+    void fetchData();
   }, [refresh]);
 
   return (
