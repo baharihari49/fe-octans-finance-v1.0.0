@@ -43,6 +43,8 @@ const Page = () => {
       <DataTable
         data={data}
         columns={columns}
+        paramSearch="no_transactions"
+        placeholderSearch="Cari berdasarkan no transaksi"
         componenstHeading={
           <TableHeading setRefresh={setRefresh} />
         }

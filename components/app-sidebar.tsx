@@ -64,7 +64,7 @@ const data = {
     },
     {
       title: "Kategori Transaksi",
-      url: "#",
+      url: "/category-transactions",
       icon: AlignStartVertical,
     },
     {

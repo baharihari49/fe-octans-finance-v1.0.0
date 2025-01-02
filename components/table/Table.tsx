@@ -12,6 +12,7 @@ import {
   getSortedRowModel,
   useReactTable,
   TableOptions,
+  ColumnDef
 } from "@tanstack/react-table";
 
 import {
@@ -29,14 +30,18 @@ import { Footer } from "./Footer";
 // Define the DataTableProps using generics
 interface DataTableProps<TData> {
   data: TData[]; // Data is an array of the generic type
-  columns: TableOptions<TData>["columns"]; // Columns definition depends on TData
+  columns: ColumnDef<TData>[]; // Columns definition depends on TData
   componenstHeading: React.ReactNode; // Heading content
+  paramSearch: string;
+  placeholderSearch: string;
 }
 
 export const DataTable = <TData,>({
   data,
   columns,
   componenstHeading,
+  paramSearch,
+  placeholderSearch,
 }: DataTableProps<TData>) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -67,7 +72,7 @@ export const DataTable = <TData,>({
 
   return (
     <div className="w-full bg-white rounded-lg border border-gray-200 shadow-sm">
-      <Heading table={table}>{componenstHeading}</Heading>
+      <Heading table={table} paramSearch={paramSearch} placholderSearch={placeholderSearch}>{componenstHeading}</Heading>
       <div className="rounded-md">
         <Table>
           <TableHeader>

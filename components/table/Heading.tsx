@@ -13,20 +13,24 @@ import { Table } from "@tanstack/react-table"; // Import the correct type from r
 type HeadingProps = {
     table: Table<any>
     children: any
+    paramSearch: string
+    placholderSearch: string
 }
 
 export const Heading: React.FC<HeadingProps> = ({ 
     table,
-    children
+    children,
+    paramSearch,
+    placholderSearch
  }) => {
     return (
         <>
             <div className="flex justify-between items-center p-4">
                 <Input
-                    placeholder="Filter no transactions..."
-                    value={(table.getColumn("no_transactions")?.getFilterValue() as string) ?? ""}
+                    placeholder={placholderSearch}
+                    value={(table.getColumn(paramSearch)?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("no_transactions")?.setFilterValue(event.target.value)
+                        table.getColumn(paramSearch)?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
