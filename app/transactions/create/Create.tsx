@@ -41,6 +41,8 @@ export const Create: React.FC<CreateProps> = ({ setRefresh }) => {
         modalTriger={<ButtonCreate setOpen={setOpen} />}
         open={open}
         setOpen={setOpen}
+        width="max-w-2xl"
+        modalDescription="Tambah transaksi baru"
         modalBodyComponents={
           <Forms
             setDataKategoriTransaksi={setDataKategoriTransaksi}

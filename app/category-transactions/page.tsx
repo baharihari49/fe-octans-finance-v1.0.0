@@ -13,7 +13,7 @@ export type data = {
 
 const Page = () => {
   const [data, setData] = useState<data[]>([]);
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {

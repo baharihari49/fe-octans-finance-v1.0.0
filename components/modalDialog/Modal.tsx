@@ -13,6 +13,8 @@ interface ModalProps {
 	modalFooter: React.ReactNode
 	open: boolean
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>
+	width?: string
+	modalDescription: string
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -20,8 +22,10 @@ const Modal: React.FC<ModalProps> = ({
 	modalTriger,
 	modalHeading,
 	modalFooter,
+	width,
 	open,
-	setOpen
+	setOpen,
+	modalDescription
 }) => (
 	<Dialog.Root open={open}>
 		<ModalTriger>
@@ -29,10 +33,13 @@ const Modal: React.FC<ModalProps> = ({
 		</ModalTriger>
 		<Dialog.Portal>
 			<Dialog.Overlay className="fixed inset-0 z-10 bg-blackA6 data-[state=open]:animate-overlayShow" />
-			<Dialog.Content className="fixed z-20 left-1/2 top-1/2 w-[90vw] max-w-2xl w-7xl -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none data-[state=open]:animate-contentShow">
+			<Dialog.Content className={`fixed z-20 left-1/2 top-1/2 w-[90vw] ${width} w-7xl -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none data-[state=open]:animate-contentShow`}>
 				<ModalHeading>
 					{modalHeading}
 				</ModalHeading>
+				<Dialog.Description>
+					{modalDescription}
+				</Dialog.Description>
 				<hr className="mt-3"/>
 				<ModalBody>
 					{modalBodyComponents}

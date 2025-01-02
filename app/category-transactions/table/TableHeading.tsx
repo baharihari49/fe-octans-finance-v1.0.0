@@ -1,4 +1,5 @@
 import React from "react"
+import { Create } from "../create/Create"
 
 interface TableHeadingProps {
     setRefresh: React.Dispatch<React.SetStateAction<boolean>>
@@ -9,7 +10,7 @@ export const TableHeading: React.FC<TableHeadingProps> = ({
 }) => {
     return (
         <div>
-            <h1>Table Heading</h1>
+            <Create setRefresh={setRefresh} />
         </div>
     )
 }

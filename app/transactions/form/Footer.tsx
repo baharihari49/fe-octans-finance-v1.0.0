@@ -49,8 +49,6 @@ export const Footer: React.FC<FooterProps> = ({
     };
 
     try {
-      console.log("Submitting data:", dataBody);
-
       // Validate dataBody using Zod schema
       formSchmeaTransaction.parse(dataBody);
 
