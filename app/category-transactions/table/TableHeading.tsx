@@ -6,11 +6,14 @@ interface TableHeadingProps {
 }
 
 export const TableHeading: React.FC<TableHeadingProps> = ({
-    setRefresh
+    setRefresh,
+   
 }) => {
     return (
         <div>
-            <Create setRefresh={setRefresh} />
+            <Create 
+                setRefresh={setRefresh} 
+            />
         </div>
     )
 }

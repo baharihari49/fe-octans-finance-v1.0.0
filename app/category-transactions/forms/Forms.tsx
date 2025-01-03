@@ -9,7 +9,7 @@ import {
   } from "@/components/ui/select";
 import React, { useEffect, useState } from "react";
 import { clientApiRequest } from "@/services/clientApiRequest";
-import { typeSchmeCategoryTransaction } from "./FooterSchema";
+import { typeSchmeCategoryTransaction } from "./FormsSchema";
 
 type TransactionType = { id: string; name: string;};
 
@@ -18,8 +18,8 @@ interface FormProps {
     dataTransactionType: TransactionType[];
     setName: React.Dispatch<React.SetStateAction<string>>;
     name: string;
-    setSelectTransactionType: React.Dispatch<React.SetStateAction<number>>;
-    selectTransactionType: number;
+    setSelectTransactionType: React.Dispatch<React.SetStateAction<string>>;
+    selectTransactionType: string;
     errors: typeSchmeCategoryTransaction
 }
 
@@ -66,14 +66,15 @@ export const Forms: React.FC<FormProps> = ({
             <div className="space-y-2">
                 <Label>Jenis Transaksi</Label>
                 <Select
-                    onValueChange={(e) => setSelectTransactionType(Number(e))}
+                    value={selectTransactionType}
+                    onValueChange={(e) => setSelectTransactionType(e)}
                 >
                     <SelectTrigger>
                         <SelectValue placeholder="Jenis Transaksi" />
                     </SelectTrigger>
                     <SelectContent>
                         {dataTransactionType.map((item) => (
-                            <SelectItem key={item.id} value={item.id}>
+                            <SelectItem key={item.id} value={item.id.toString()}>
                                 {item.name}
                             </SelectItem>
                         ))}

@@ -5,19 +5,19 @@ import { Heading } from "./Heading";
 import { ButtonCreate } from "./BtnCreate";
 import { Forms } from "../forms/Forms";
 import { Footer } from "../forms/Footer";
-import { typeSchmeCategoryTransaction } from "../forms/FooterSchema";
+import { typeSchmeCategoryTransaction } from "../forms/FormsSchema";
 
 interface CreateProps {
     setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Create: React.FC<CreateProps> = ({
-    setRefresh
+    setRefresh,
 }) => {
     const [open, setOpen] = useState<boolean>(false);
     const [dataTransactionType, setDataTransactionType] = useState<{ id: string; name: string }[]>([]);
     const [name, setName] = useState<string>('');
-    const [selectTransactionType, setSelectTransactionType] = useState<number>(0);
+    const [selectTransactionType, setSelectTransactionType] = useState<string>('0');
     const [errors, setErrors] = useState<typeSchmeCategoryTransaction>({ name: undefined, transaction_type_id: undefined });
 
     return (
@@ -25,7 +25,7 @@ export const Create: React.FC<CreateProps> = ({
             <Modal
                 open={open}
                 setOpen={setOpen}
-                modalTriger={<ButtonCreate setOpen={setOpen} />}
+                modalTriger={<ButtonCreate setOpen={setOpen}/>}
                 modalHeading={<Heading />}
                 width="max-w-md"
                 modalDescription="Tambah kategori transaksi baru"
@@ -46,6 +46,8 @@ export const Create: React.FC<CreateProps> = ({
                     setErrors={setErrors}
                     name={name}
                     selectTransactionType={selectTransactionType}
+                    parameter=""
+                    isEdit={false}
                 />}
             />
         </>

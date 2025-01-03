@@ -1,29 +1,32 @@
-import { clientApiRequest } from "@/services/clientApiRequest"
+import { clientApiRequest } from "@/services/clientApiRequest";
 
 interface dataBody {
     name: string
-    transaction_type_id: string
+    transaction_type_id: number
     default: number
     is_show: number
 }
 
+
 interface SubmitProps {
     dataBody: dataBody
+    parameter: string
 }
 
 interface ApiResponse {
     status: number;
     message: string;
     data: any; // Replace `any` with a more specific type if known
-  }
-
-export const SubmitCreate = async ({dataBody}: SubmitProps): Promise<ApiResponse> => {
+}
+export const SubmitEdit= async ({dataBody, parameter}: SubmitProps): Promise<ApiResponse> => {
     try{
         const response: ApiResponse = await clientApiRequest({
             url: 'transaction-category',
-            method: 'POST',
-            body: dataBody
+            method: 'PUT',
+            body: dataBody,
+            parameter: parameter
         })
+
 
         return response
     } catch (error) {

@@ -5,11 +5,16 @@ interface BtnCreateProps {
 }
 
 export const ButtonCreate: React.FC<BtnCreateProps> = ({
-    setOpen
+    setOpen,
 }) => {
+
+    const handleClick = () => {
+        setOpen(true)
+    }
+
     return (
         <>
-            <Button onClick={() => setOpen(true)}>
+            <Button onClick={() => handleClick()}>
                 Tambah Kategori Transaksi
             </Button>
         </>

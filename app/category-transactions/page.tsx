@@ -31,15 +31,17 @@ const Page = () => {
     void fetchData();
   }, [refresh]);
 
+  const createColumns = columns({setRefresh});
+
   return (
     <>
       <DataTable<data>
         data={data}
-        columns={columns}
+        columns={createColumns}
         paramSearch="name"
         placeholderSearch="Cari berdasarkan nama"
         componenstHeading={
-          <TableHeading setRefresh={setRefresh} />
+          <TableHeading setRefresh={setRefresh}/>
         }
       />
     </>
