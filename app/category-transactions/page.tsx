@@ -9,7 +9,10 @@ import { TableHeading } from "./table/TableHeading";
 export type data = {
   name: string;
   id: string;
+  default: number;
+  transaction_type: { name: string };
 };
+
 
 const Page = () => {
   const [data, setData] = useState<data[]>([]);

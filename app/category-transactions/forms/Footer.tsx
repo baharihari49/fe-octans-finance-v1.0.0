@@ -9,7 +9,11 @@
 import React from "react";
 import { SubmitCreate } from "../create/Submit";
 import { SubmitEdit } from "../edit/Submit";
+import { SubmitDelete } from "../delete/submit";
 import { formSchmeaCategoryTransaction } from "./FormsSchema";
+import { Button } from "@/components/ui/button";
+import { AlertDialogDelete } from "../delete/AlertDialog";
+import { useState } from "react";
 
 interface FooterProps {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,6 +24,7 @@ interface FooterProps {
     parameter: string;
     setIsEdit?: React.Dispatch<React.SetStateAction<boolean>>;
     isEdit?: boolean;
+    labelBtn: string;
 }
 
 export const Footer: React.FC<FooterProps> = ({
@@ -31,7 +36,11 @@ export const Footer: React.FC<FooterProps> = ({
     parameter,
     setIsEdit,
     isEdit,
+    labelBtn
 }) => {
+
+    const [openAlert, setOpenAlert] = useState<boolean>(false);
+
     const handleClick = async () => {
         if (isEdit) {
             const dataBody = {
@@ -44,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({
                 formSchmeaCategoryTransaction.parse(dataBody);
                 const response = await SubmitEdit({ dataBody, parameter });
                 if (setIsEdit) setIsEdit(false); // Pastikan setIsEdit ada sebelum memanggilnya
-                if(response.status === 200) {
+                if (response.status === 200) {
                     setOpen(false);
                     setRefresh((prevRefresh) => !prevRefresh);
                 }
@@ -56,14 +65,12 @@ export const Footer: React.FC<FooterProps> = ({
                     }, {});
 
                     setErrors(zodErrors); // Set error ke state
-                } else {
-                    console.error("Unexpected validation error:", validationError); // Log error tidak terduga
                 }
             }
         } else {
             const dataBody = {
                 name,
-                transaction_type_id: selectTransactionType,
+                transaction_type_id: Number(selectTransactionType),
                 is_show: 1,
                 default: 0,
             };
@@ -85,19 +92,29 @@ export const Footer: React.FC<FooterProps> = ({
                     }, {});
 
                     setErrors(zodErrors); // Set error ke state
-                } else {
-                    console.error("Unexpected validation error:", validationError); // Log error tidak terduga
                 }
             }
         }
     };
+    
+
 
     return (
-        <button
-            onClick={() => void handleClick()} // Gunakan langsung tanpa `void`
-            className="inline-flex h-[35px] items-center justify-center rounded bg-green4 px-[15px] font-medium leading-none text-green11 hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7 focus:outline-none"
-        >
-            Save changes
-        </button>
+        <>
+            <div className="space-x-3">
+                {isEdit && (
+                    <AlertDialogDelete 
+                        open={openAlert} 
+                        setOpen={setOpenAlert}
+                        setRefresh={setRefresh}
+                        parameter={parameter}
+                    />
+                )}
+                <Button
+                    onClick={() => void handleClick()}>
+                    {labelBtn}
+                </Button>
+            </div>
+        </>
     );
 };

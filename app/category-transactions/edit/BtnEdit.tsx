@@ -13,6 +13,7 @@ interface BtnEditProps {
     setSelectTransactionType: React.Dispatch<React.SetStateAction<string>>
     parameter: string
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
+    isDefault: number
 }
 
 interface ApiResponse {
@@ -27,7 +28,8 @@ export const ButtonEdit: React.FC<BtnEditProps> = ({
     setName,
     setSelectTransactionType,
     parameter,
-    setIsEdit
+    setIsEdit,
+    isDefault
 }) => {
 
     const handleClicked = async () => {
@@ -48,16 +50,30 @@ export const ButtonEdit: React.FC<BtnEditProps> = ({
 
     return (
         <>
-            <TooltipProvider delayDuration={200}>
-                <Tooltip>
-                    <TooltipTrigger>
-                        <div className="p-2 bg-gray-100 rounded-md" onClick={() => void handleClicked()}>
-                            <Pencil2Icon className="text-primary"/>
-                        </div>
-                    </TooltipTrigger>
-                    <TooltipContent side="top">Klik 2 kali ketika halam pertama kali di muat</TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
+            {isDefault === 0 && (
+                <TooltipProvider delayDuration={200}>
+                    <Tooltip>
+                        <TooltipTrigger>
+                            <div className="p-2 bg-gray-100 rounded-md" onClick={() => void handleClicked()}>
+                                <Pencil2Icon className="text-primary" />
+                            </div>
+                        </TooltipTrigger>
+                        <TooltipContent side="top">Klik untuk mengedit</TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+            )}
+            {isDefault === 1 && (
+                 <TooltipProvider delayDuration={200}>
+                 <Tooltip>
+                     <TooltipTrigger>
+                         <div className="p-2 bg-gray-100 rounded-md cursor-not-allowed">
+                             <Pencil2Icon className="text-gray-500"/>
+                         </div>
+                     </TooltipTrigger>
+                     <TooltipContent side="top">Kategori transaksi bawaan tidak dapat di ubah</TooltipContent>
+                 </Tooltip>
+             </TooltipProvider>
+            )}
         </>
     )
 }

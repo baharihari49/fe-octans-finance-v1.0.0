@@ -2,7 +2,7 @@ import { clientApiRequest } from "@/services/clientApiRequest"
 
 interface dataBody {
     name: string
-    transaction_type_id: string
+    transaction_type_id: number
     default: number
     is_show: number
 }

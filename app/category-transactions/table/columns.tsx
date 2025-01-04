@@ -6,6 +6,8 @@ import React, { Dispatch } from "react";
 export type data = {
   name: string;
   id: string;
+  default: number;
+  transaction_type: { name: string };
 };
 
 interface ColumnsProps {
@@ -22,6 +24,14 @@ export const columns = ({ setRefresh}: ColumnsProps): ColumnDef<data>[] => {
       ),
     },
     {
+      accessorFn: (row) => row.transaction_type.name,
+      id: "transaction_type",
+      header: "Jenis Transaksi",
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("transaction_type")}</div>
+      ),
+    },
+    {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
@@ -33,6 +43,7 @@ export const columns = ({ setRefresh}: ColumnsProps): ColumnDef<data>[] => {
             <Edit 
               parameter={data.id} 
               setRefresh={setRefresh} 
+              isDefault={data.default}
             />
           </div>
         );

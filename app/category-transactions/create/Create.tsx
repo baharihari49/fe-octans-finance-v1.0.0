@@ -48,6 +48,7 @@ export const Create: React.FC<CreateProps> = ({
                     selectTransactionType={selectTransactionType}
                     parameter=""
                     isEdit={false}
+                    labelBtn="Tambah Kategori"
                 />}
             />
         </>

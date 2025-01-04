@@ -8,11 +8,13 @@ import { Footer } from "../forms/Footer";
 interface EditProps {
     parameter: string
     setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+    isDefault: number
 }
 
 export const Edit: React.FC<EditProps> = ({
     parameter,
     setRefresh,
+    isDefault
  }) => {
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [dataTransactionType, setDataTransactionType] = useState<{ id: string; name: string }[]>([]);
@@ -32,6 +34,7 @@ export const Edit: React.FC<EditProps> = ({
                     setSelectTransactionType={setSelectTransactionType}
                     parameter={parameter}
                     setIsEdit={setIsEdit}
+                    isDefault={isDefault}
                 />}
                 width="max-w-md"
                 modalDescription="Edit kategori transaksi"
@@ -56,6 +59,7 @@ export const Edit: React.FC<EditProps> = ({
                         name={name}
                         setIsEdit={setIsEdit}
                         isEdit={isEdit}
+                        labelBtn="Simpan perubahan"
                     />}
             />
         </>
