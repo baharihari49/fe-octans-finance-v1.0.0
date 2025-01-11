@@ -71,7 +71,7 @@ export const DataTable = <TData,>({
   });
 
   return (
-    <div className="w-full bg-white rounded-lg border border-gray-200 shadow-sm">
+    <div className="w-full bg-white rounded-lg border h-fit border-gray-200 shadow-sm">
       <Heading table={table} paramSearch={paramSearch} placholderSearch={placeholderSearch}>{componenstHeading}</Heading>
       <div className="rounded-md">
         <Table>

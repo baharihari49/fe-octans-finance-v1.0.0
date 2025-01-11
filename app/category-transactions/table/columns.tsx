@@ -1,5 +1,4 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Pencil2Icon } from "@radix-ui/react-icons";
 import { Edit } from "../edit/Edit";
 import React, { Dispatch } from "react";
 

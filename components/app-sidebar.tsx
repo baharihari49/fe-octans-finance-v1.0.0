@@ -69,7 +69,7 @@ const data = {
     },
     {
       title: "Anggaran",
-      url: "#",
+      url: "/budgetings",
       icon: Scale,
     },
     {
