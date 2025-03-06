@@ -38,7 +38,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                         </header>
                     </>
                 )}
-                <div className="p-3 bg-gray-50 h-screen">
+                <div className="p-3 bg-gray-50 h-screen border">
                     {children}
                 </div>
             </SidebarInset>

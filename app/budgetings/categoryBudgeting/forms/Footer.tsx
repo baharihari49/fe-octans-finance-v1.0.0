@@ -90,13 +90,15 @@ export const Footer: React.FC<FooterProps> = ({
     return (
         <>
             <div className="space-x-2">
-                <AlertDialogDelete
-                    setOpen={setOpenAlert}
-                    open={openAlert}
-                    setRefresh={setRefresh}
-                    parameter={parameter}
-                    setOpenDialog={setOpen}
-                />
+                {isEdit && (
+                    <AlertDialogDelete
+                        setOpen={setOpenAlert}
+                        open={openAlert}
+                        setRefresh={setRefresh}
+                        parameter={parameter}
+                        setOpenDialog={setOpen}
+                    />
+                )}
                 <button
                     onClick={() => void handleClick()}
                     className="inline-flex h-[35px] items-center justify-center rounded bg-green4 px-[15px] font-medium leading-none text-green11 hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7 focus:outline-none"

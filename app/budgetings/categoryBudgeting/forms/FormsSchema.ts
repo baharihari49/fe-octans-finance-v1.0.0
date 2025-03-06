@@ -1,7 +1,7 @@
 import z from 'zod';
 
 export interface typeSchmeCategoryBudgeting {
-   value: number;
+   value: string;
 }
 
 export const formSchmeaCategoryBudgeting = z.object({

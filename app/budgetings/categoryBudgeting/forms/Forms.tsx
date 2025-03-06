@@ -1,6 +1,7 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { typeSchmeCategoryBudgeting } from "./FormsSchema";
+import { useEffect } from "react";
 
 interface FormProps {
     value: number
@@ -13,6 +14,11 @@ export const Forms: React.FC<FormProps> = ({
     value,
     errors
 }) => {
+
+    useEffect(() => {
+        console.log(errors)
+    } ,[errors])
+
     return (
         <>
             <Label htmlFor="amount" className="text-sm font-semibold text-mauve12">

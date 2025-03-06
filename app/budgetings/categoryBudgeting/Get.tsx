@@ -22,7 +22,7 @@ export const Get = () => {
     const [open, setOpen] = useState<boolean>(false)
     const [refresh, setRefresh] = useState<boolean>(false)
     const [isEdit, setIsEdit] = useState<boolean>(false)
-    const [errors, setErrors] = useState<typeSchmeCategoryBudgeting>({value: 0})
+    const [errors, setErrors] = useState<typeSchmeCategoryBudgeting>({value: ''})
 
     useEffect(() => {
         const getData = async () => {
