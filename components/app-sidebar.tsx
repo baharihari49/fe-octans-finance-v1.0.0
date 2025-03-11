@@ -74,7 +74,7 @@ const data = {
     },
     {
       title: "Vendor",
-      url: "#",
+      url: "/vendors",
       icon: BookUser,
     },
     {
